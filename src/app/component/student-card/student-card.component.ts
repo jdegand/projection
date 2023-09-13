@@ -11,7 +11,12 @@ import { CardComponent } from '../../ui/card/card.component';
     [list]="students"
     [type]="cardType"
     customClass="bg-light-green"
-  ></app-card>`,
+  >
+  <img
+      src="assets/img/student.webp"
+      width="200px"
+    />
+  </app-card>`,
   standalone: true,
   styles: [
     `

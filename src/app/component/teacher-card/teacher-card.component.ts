@@ -11,7 +11,12 @@ import { CardComponent } from '../../ui/card/card.component';
     [list]="teachers"
     [type]="cardType"
     customClass="bg-light-red"
-  ></app-card>`,
+  >
+  <img
+      src="assets/img/teacher.png"
+      width="200px"
+    />
+  </app-card>`,
   styles: [
     `
       ::ng-deep .bg-light-red {
