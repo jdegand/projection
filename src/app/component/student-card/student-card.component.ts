@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import { FakeHttpService, randStudent } from '../../data-access/fake-http.service';
 import { StudentStore } from '../../data-access/student.store';
 import { CardType } from '../../model/card.model';
 import { Student } from '../../model/student.model';
@@ -11,6 +11,7 @@ import { CardComponent } from '../../ui/card/card.component';
     [list]="students"
     [type]="cardType"
     customClass="bg-light-green"
+    (add)="addStudent()"
   >
   <img
       src="assets/img/student.webp"
@@ -37,5 +38,9 @@ export class StudentCardComponent implements OnInit {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
 
     this.store.students$.subscribe((s) => (this.students = s));
+  }
+
+  addStudent(){
+    this.store.addOne(randStudent());
   }
 }

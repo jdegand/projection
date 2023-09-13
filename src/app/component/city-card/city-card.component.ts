@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FakeHttpService } from '../../data-access/fake-http.service';
+import { FakeHttpService, randomCity } from '../../data-access/fake-http.service';
 import { CityStore } from '../../data-access/city.store';
 import { CardType } from '../../model/card.model';
 import { City } from '../../model/city.model';
@@ -11,6 +11,7 @@ import { CardComponent } from '../../ui/card/card.component';
     [list]="cities"
     [type]="cardType"
     customClass="bg-light-blue"
+    (add)="addCity()"
   >
   <img
       src="assets/img/urban-transport-paper-style-assortment.jpg"
@@ -38,5 +39,9 @@ export class CityCardComponent implements OnInit {
     this.http.fetchCities$.subscribe((s) => this.store.addAll(s));
 
     this.store.cities$.subscribe((s) => (this.cities = s));
+  }
+
+  addCity(){
+    this.store.addOne(randomCity());
   }
 }

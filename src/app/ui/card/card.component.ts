@@ -1,11 +1,7 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { randStudent, randTeacher, randomCity } from '../../data-access/fake-http.service';
-import { StudentStore } from '../../data-access/student.store';
-import { TeacherStore } from '../../data-access/teacher.store';
 import { CardType } from '../../model/card.model';
 import { ListItemComponent } from '../list-item/list-item.component';
-import { CityStore } from 'src/app/data-access/city.store';
 
 @Component({
   selector: 'app-card',
@@ -18,24 +14,16 @@ export class CardComponent {
   @Input() type!: CardType;
   @Input() customClass = '';
   
-  //@Output() add = new EventEmitter<void>();
+  @Output() add = new EventEmitter<void>();
 
   CardType = CardType;
 
-  constructor(
-    private teacherStore: TeacherStore,
-    private studentStore: StudentStore,
-    private cityStore: CityStore
-  ) {}
+  constructor() {}
 
-  addNewItem() {
-    if (this.type === CardType.TEACHER) {
-      this.teacherStore.addOne(randTeacher());
-    } else if (this.type === CardType.STUDENT) {
-      this.studentStore.addOne(randStudent());
-    } else if (this.type === CardType.CITY) {
-      this.cityStore.addOne(randomCity());
-    }
-  }
+  // remove card type ?
+
+  // use customClass to pass a css class to each item 
+  // so don't need :ng-deep ?
+  // is :ng-deep actually problematic ?
   
 }
