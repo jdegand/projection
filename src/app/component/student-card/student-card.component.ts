@@ -4,12 +4,12 @@ import { StudentStore } from '../../data-access/student.store';
 import { CardType } from '../../model/card.model';
 import { Student } from '../../model/student.model';
 import { CardComponent } from '../../ui/card/card.component';
+import { ListItemComponent } from "../../ui/list-item/list-item.component";
 
 @Component({
   selector: 'app-student-card',
   template: `<app-card
     [list]="students"
-    [type]="cardType"
     customClass="bg-light-green"
     (add)="addStudent()"
   >
@@ -17,6 +17,12 @@ import { CardComponent } from '../../ui/card/card.component';
       src="assets/img/student.webp"
       width="200px"
     />
+    <ng-template #rowRef let-student>
+      <app-list-item (delete)="deleteStudent(student.id)">
+        {{student.firstname}}
+      </app-list-item>
+    </ng-template>
+    
   </app-card>`,
   standalone: true,
   styles: [
@@ -26,13 +32,12 @@ import { CardComponent } from '../../ui/card/card.component';
       }
     `,
   ],
-  imports: [CardComponent],
+  imports: [CardComponent, ListItemComponent]
 })
 export class StudentCardComponent implements OnInit {
   students: Student[] = [];
-  cardType = CardType.STUDENT;
 
-  constructor(private http: FakeHttpService, private store: StudentStore) {}
+  constructor(private http: FakeHttpService, private store: StudentStore) { }
 
   ngOnInit(): void {
     this.http.fetchStudents$.subscribe((s) => this.store.addAll(s));
@@ -40,7 +45,11 @@ export class StudentCardComponent implements OnInit {
     this.store.students$.subscribe((s) => (this.students = s));
   }
 
-  addStudent(){
+  addStudent() {
     this.store.addOne(randStudent());
+  }
+
+  deleteStudent(id: number) {
+    this.store.deleteOne(id);
   }
 }

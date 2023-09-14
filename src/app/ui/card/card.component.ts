@@ -1,29 +1,21 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CardType } from '../../model/card.model';
-import { ListItemComponent } from '../list-item/list-item.component';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
+import { Component, ContentChild, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   standalone: true,
-  imports: [NgIf, NgFor, ListItemComponent],
+  imports: [NgIf, NgFor, NgTemplateOutlet],
 })
 export class CardComponent {
+  @Input() customClass = ''; // use customClass to pass a css class to each item ?
+
   @Input() list: any[] | null = null;
-  @Input() type!: CardType;
-  @Input() customClass = '';
-  
   @Output() add = new EventEmitter<void>();
 
-  CardType = CardType;
+  @ContentChild('rowRef', { read: TemplateRef })
+  rowTemplate!: TemplateRef<any>; // typing as ListItemComponent causes problems
 
-  constructor() {}
-
-  // remove card type ?
-
-  // use customClass to pass a css class to each item 
-  // so don't need :ng-deep ?
-  // is :ng-deep actually problematic ?
-  
+  // Type '{ $implicit: any; }' is not assignable to type 'ListItemComponent'.
+  // Object literal may only specify known properties, and '"$implicit"' does not exist in type 'ListItemComponent'.
 }
