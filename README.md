@@ -20,9 +20,9 @@ CSS: prefer not to use ::ng-deep, find a better way.
 ## Thoughts
 
 - Didn't add tailwind.  
-- Replaced trash svg with a X.  The trash svg didn't show up and this is probably related to Tailwind's absence.
-- No picture included for the cities section.  Just added the text cities to divide sections and changed background color.  
-- First thought was that I needed a city store.  Copied and pasted student store and used find and replace to change student to city.
+- Replaced trash svg with a 'X'.  The trash svg didn't show up and this is probably related to Tailwind's absence.
+- There is no picture included for the cities section.  Just added the text cities to divide sections and changed background color.  
+- My first thought was that I needed a city store.  I copied and pasted student store and used find and replace to change student to city.
 - I added the city store and city-card component, but I couldn't get the name and the country to actually be in the html.  
 - Need inputs for the city properties in the list-item component?
 - I changed the name property binding to `[name]="item.firstname || item.name"` in the `card.component.html`.  This gives you at least a name property for the cities.  
@@ -30,17 +30,17 @@ CSS: prefer not to use ::ng-deep, find a better way.
 - I forgot you *also* have to change the template html of app-list-item.  
 - Implementing the city card shows how much work has to be done to maintain the same look for all cards.  You will have to add many more *ngIf's to the app-list-item template if there is a limited overlap of properties. 
 - I added another ng-content for image source.  This ng-content was for a paragraph tag but I included a link inside the paragraph.  Not sure if this is a good practice but it seems to work fine.    
-- Didn't see much in the official angular docs about event handling and content projection.  
+- I didn't see much in the official angular docs about event handling and content projection.  
 - I have seen examples where the ng-content is wrapped with another element (div) and the click event goes on the wrapper element.
 - I got the concept of changing the app-list-item to use ng-content, but I struggled getting ngTemplateOutletContext to work correctly.
 - I looked at [Thomas' blog article](https://medium.com/@thomas.laforge/create-a-highly-customizable-component-cc3a9805e4c5) and nothing really stuck out as totally different.
 - Adding the delete output to the todo-list component prompted an error to be thrown.  If you type the TemplateRef as ListItemComponent, you get an error.  
 - I thought about adding the context variable to the ListItemComponent, but I don't think you can overwrite it in the template. 
-- If you are going to use NgTemplateOutlet in a list, I'd imagine you have to just set the object in the template.   
-- Searching google for clarity proved fruitless. 
+- If you are going to use NgTemplateOutlet in a list, I guess you just have to set it to an object in the template.   
+- Searching Google for clarity proved fruitless. 
 - Why would there be a danger to add ChangeDetectionStrategy.onPush?  There is no mutation happening in the store.  Not using async pipe means data could be out of sync? 
 - One problem of using pull requests to figure out code is that there are limited comments in the code and most people leave the pull request description blank.  
-- I thought about passing CardType as part of the context object to *ngTemplateOutlet.  Then I guess you could have keep the old removeItem method.  
+- I thought about passing CardType as part of the context object to *ngTemplateOutlet.  Then I guess you could have kept the old removeItem method.  
 
 ## Continued Development
 
